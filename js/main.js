@@ -34,8 +34,8 @@ let speed = 1000;
 let makeBlockCount = 0;
 let accelarationCount = 0;
 
-let waitTime = 1000;
-
+let waitTime = 100;
+//let waitCount = 0;
 
 // 初期実行
 $("#scoreScreen").hide();
@@ -71,7 +71,7 @@ function setTimer(){
     timer = setInterval("mainProcess()", speed);
 }
 
-async function mainProcess(){
+function mainProcess(){
     //confirm game over
     if(gameover() == 0){
         return 0;
@@ -86,26 +86,22 @@ async function mainProcess(){
         writeDownBlock();
         draw();
 
-        let waitFlag = 0;
+        clearInterval(timer);
+
+        //waitCount = 0;
         // ブロックが落ちきって場所が確定した時点でブロックの削除を行う
-        do{
-            if(checkMovableBlock()){
-                draw();
-                clearInterval(timer);
-                wait(waitTime, waitMoveBrocks);
-                console.log("wait実行");
-                waitFlag = 1;
-            }
-        }while(deleteBlock());
+        dltReWait(waitTime);
 
-        saveBoard();
+        // do{
+        //     checkMovableBlock();
+        // }while(deleteBlock());
 
-        if(waitFlag == 1){
-            wait(waitTime, waitWaitMoveBrocks);
-        }else{
-            accelaration();
-            touchAfterProcess();
-        }
+        // saveBoard();
+
+        // accelaration();
+        // touchAfterProcess();
+
+        // setTimer();
     }else{
         moveDownBlock();
         copyPiledBlock();
@@ -114,31 +110,46 @@ async function mainProcess(){
     }
 }
 
-let waitMoveBrocks = function(){
-    setTimer();
+let dltReWait = function(milli_sec){
+    let c = checkMovableBlock();
+    let d = deleteBlock();
+    if(c == 1 || d == 1){
+        //waitCount++;
+        let wrapFunc;
+        wait(milli_sec, wrapFunc = function(){
+            dltReWait(milli_sec);
+        });
+    }else{
+        //if(waitCount == 0){
+            saveBoard();
+            accelaration();
+            touchAfterProcess();
+            setTimer();
+        //}
+    }
 }
 
-let waitWaitMoveBrocks = function(){
-    accelaration();
-    touchAfterProcess();
+// sleep
+function wait(milli_sec, functionSet) {
+    setTimeout(function () {
+        //waitCount--;
+        functionSet();
+        console.log(milli_sec + "ms停止");
+    }, milli_sec);
 }
 
 function accelaration(){
     makeBlockCount++;
-        if(makeBlockCount % 5 == 0 && 300 < speed){
-            accelarationCount++;
-            clearInterval(timer);
-
-            if(accelarationCount < 5){
-                speed -= 20;
-            }else if(4 <= accelarationCount && accelarationCount < 8){
-                speed -= 10;
-            }else{
-                speed -= 5;
-            }
-
-            setTimer();
+    if(makeBlockCount % 5 == 0 && 300 < speed){
+        accelarationCount++;
+        if(accelarationCount < 5){
+            speed -= 20;
+        }else if(4 <= accelarationCount && accelarationCount < 8){
+            speed -= 10;
+        }else{
+            speed -= 5;
         }
+    }
 }
 
 function touchAfterProcess(){
@@ -398,23 +409,15 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
-// sleep
-function wait(milli_sec, functionSet) {
-    setTimeout(function () {
-        functionSet();
-        console.log(milli_sec + "ms停止");
-    }, milli_sec);
-};
-
 // 拡大縮小を止める
 document.documentElement.addEventListener('touchstart', function (e) {
     if (e.touches.length >= 2) { e.preventDefault(); }
 }, { passive: false });
 
 // ダブルタップでの拡大停止
-var t = 0;
+let t = 0;
 document.documentElement.addEventListener('touchend', function (e) {
-    var now = new Date().getTime();
+    let now = new Date().getTime();
     if ((now - t) < 350) {
         e.preventDefault();
     }
