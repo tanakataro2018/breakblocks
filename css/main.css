@@ -1,0 +1,153 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: #ffffff;
+}
+
+#main{
+    width: 480px;
+    height: 600px;
+}
+
+#game{
+    background-color: #666666;
+    width: 480px;
+    height: 600px;
+    border-color: #000000;
+    border-style: solid;
+    border-width: 1px;
+    margin: 0 auto;
+}
+
+.baseBlock{
+    width: 58px;
+    height: 58px;
+    background-color: #666666;
+    border-color: #000000;
+    border-style: solid;
+    border-width: 1px;
+    display: inline-block;
+}
+
+.redBlock{
+    width: 58px;
+    height: 58px;
+    background-color: #ff0000;
+    border-color: #000000;
+    border-style: solid;
+    border-width: 1px;
+    display: inline-block;
+}
+
+.blueBlock{
+    width: 58px;
+    height: 58px;
+    background-color: #0000ff;
+    border-color: #000000;
+    border-style: solid;
+    border-width: 1px;
+    display: inline-block;
+}
+
+.greenBlock{
+    width: 58px;
+    height: 58px;
+    background-color: #00ff00;
+    border-color: #000000;
+    border-style: solid;
+    border-width: 1px;
+    display: inline-block;
+}
+
+.yellowBlock{
+    width: 58px;
+    height: 58px;
+    background-color: #ffff00;
+    border-color: #000000;
+    border-style: solid;
+    border-width: 1px;
+    display: inline-block;
+}
+
+.cyanBlock{
+    width: 58px;
+    height: 58px;
+    background-color: #00ffff;
+    border-color: #000000;
+    border-style: solid;
+    border-width: 1px;
+    display: inline-block;
+}
+
+.magentaBlock{
+    width: 58px;
+    height: 58px;
+    background-color: #ff00ff;
+    border-color: #000000;
+    border-style: solid;
+    border-width: 1px;
+    display: inline-block;
+}
+
+.LeftButton{
+    width: 48%;
+    display: inline-block;
+    font-size: 48pt;
+    text-align: center;
+    border-width: 1px;
+    border-color: #000000; 
+    border-style: solid;
+}
+
+.RightButton{
+    width: 48%;
+    display: inline-block;
+    font-size: 48pt;
+    text-align: center;
+    border-width: 1px;
+    border-color: #000000;
+    border-style: solid;
+}
+
+.FallButton{
+    width: 96%;
+    display: inline-block;
+    font-size: 48pt;
+    text-align: center;
+    border-width: 1px;
+    border-color: #000000;
+    border-style: solid;
+}
+
+.Button{
+    margin-top: 8px;
+    text-align: center;
+}
+
+#scoreScreen{
+    width: 460px;
+    height: 560px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.retryButton{
+    font-size: 48pt;
+    width: 80%;
+    margin: auto;
+    background-color: #fae3a2;
+    color: #000;
+}
+
+.mgn-t-b{
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+#message{
+    text-align: center;
+}

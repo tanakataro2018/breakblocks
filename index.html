@@ -1,0 +1,30 @@
+<html>
+<head>
+    <title>Break Blocks</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+    <script src="./js/jquery-3.3.1.min.js"></script>
+    <link rel="shortcut icon" href="favicon.ico">
+</head>
+<body>
+    <div id="main">
+        <div id="game">
+            ここにゲーム画面が表示されます。<br>
+            ゲーム画面が表示されない場合は、JSが動作していないか<br>
+            なんらかの問題が生じています。
+        </div>
+        <div class="Button">
+            <div class="LeftButton" onclick="ButtonTap(-1);">&#9664;</div><div class="RightButton" onclick="ButtonTap(1);">&#9654;</div>
+            <div class="fallButton" onclick="FallButton();">&#9660;</div>
+        </div>
+    </div>
+
+    <div id="scoreScreen">
+        <div id="scoreNum"></div>
+        <div id="message"></div>
+        <div id="ad"></div>
+    </div>
+
+    <script src="./js/main.js"></script>
+</body>
+</html>
