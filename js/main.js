@@ -35,7 +35,6 @@ let makeBlockCount = 0;
 let accelarationCount = 0;
 
 let waitTime = 100;
-//let waitCount = 0;
 
 // 初期実行
 $("#scoreScreen").hide();
@@ -88,20 +87,8 @@ function mainProcess(){
 
         clearInterval(timer);
 
-        //waitCount = 0;
         // ブロックが落ちきって場所が確定した時点でブロックの削除を行う
         dltReWait(waitTime);
-
-        // do{
-        //     checkMovableBlock();
-        // }while(deleteBlock());
-
-        // saveBoard();
-
-        // accelaration();
-        // touchAfterProcess();
-
-        // setTimer();
     }else{
         moveDownBlock();
         copyPiledBlock();
@@ -111,30 +98,36 @@ function mainProcess(){
 }
 
 let dltReWait = function(milli_sec){
+    let wrapFunc;
     let c = checkMovableBlock();
+    // ここで draw(); して、100ms待ったほうがいい
+    if(c == 1){
+        wait(milli_sec, wrapFunc = function(){
+            dltReWait(milli_sec);
+        });
+        draw();
+        return 0;
+    }
+
     let d = deleteBlock();
-    if(c == 1 || d == 1){
-        //waitCount++;
-        let wrapFunc;
+    if(d == 1){
+        draw();
         wait(milli_sec, wrapFunc = function(){
             dltReWait(milli_sec);
         });
     }else{
-        //if(waitCount == 0){
-            saveBoard();
-            accelaration();
-            touchAfterProcess();
-            setTimer();
-        //}
+        saveBoard();
+        accelaration();
+        touchAfterProcess();
+        setTimer();
     }
 }
 
 // sleep
 function wait(milli_sec, functionSet) {
     setTimeout(function () {
-        //waitCount--;
         functionSet();
-        console.log(milli_sec + "ms停止");
+        // console.log(milli_sec + "ms停止");
     }, milli_sec);
 }
 
