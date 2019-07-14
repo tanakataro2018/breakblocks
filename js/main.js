@@ -190,7 +190,7 @@ function gameover(opt){
         $("#scoreNum").html("Your Score: <b>" + score + "</b><br>ゲームオーバーです。<br><br>");
         $("#message").html("<input class='retryButton' type='button' value='リトライ' onclick='answer(1);'><br><hr class='mgn-t-b'>");
 
-        $("#ad").html("<a href='https://www.youtube.com/channel/UCKKKB5T2zwEcqA3pKiS09Kw'>tanaka taroのYoutubeチャンネルはこちら</a>");
+        $("#ad").html("<a href='https://www.youtube.com/channel/UCKKKB5T2zwEcqA3pKiS09Kw' target='_blank'>tanaka taroのYoutubeチャンネルはこちら</a>");
 
         $("#main").hide();
         $("#scoreScreen").show();
@@ -418,3 +418,23 @@ document.documentElement.addEventListener('touchend', function (e) {
 }, false);
 /// 拡大縮小止めここまで
 
+$(document).keydown(function(e) {
+    switch (e.keyCode) {
+        case 37:
+            // Key: <
+            ButtonTap(-1);
+            break;
+        case 38:
+            // Key:  
+            FallButton();
+            break;
+        case 39:
+            // Key: >
+            ButtonTap(1);
+            break;
+        case 40:
+            // Key: 
+            FallButton();
+            break;
+    }
+});
